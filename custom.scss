@@ -1,0 +1,13 @@
+$alert-padding-y: .25rem;
+
+$theme-colors: (
+  "primary": #245d69,
+  "info": #25272f,
+  "success": #409658,
+  "warning": #bd8620,
+  "danger": #f44336
+);
+
+$card-spacer-y: .5rem;
+$border-radius: 0rem;
+@import "node_modules/bootstrap/scss/bootstrap";

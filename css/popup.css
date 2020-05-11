@@ -1,0 +1,50 @@
+body {
+    width: 400px;
+    max-height: 400px;
+}
+/* .input-group>.input-group-prepend {
+    flex: 0 0 20%;
+}
+
+.input-group .input-group-text {
+    width: 100%;
+} */
+
+
+        .navbar .bottom{
+            bottom: 0;
+            position: fixed;
+        }
+
+        .navbar-brand {
+            font-family: 'Poppins', serif;
+            font-weight: bold;
+            color: black;
+        }
+nav ul {
+    width: -webkit-fill-available;
+}
+
+.card-body {
+    padding-bottom: .25rem;
+}
+
+label {
+    margin-bottom: 0rem;
+}
+
+.selectReminder {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.selectedInfo {
+    min-height: 1.75rem;
+    border: 1px solid black;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+#pills-collection .card-body {
+    padding-top: 0rem;
+}

@@ -1,0 +1,43 @@
+{
+    "name": "Shpr",
+    "version": "1.0.0",
+    "description": "Add item to Shpr fitting room list",
+    "permissions": [
+        "activeTab",  
+        "declarativeContent", 
+        "storage", 
+        "tabs", 
+        "cookies",
+        "*://*.shpr.store/"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "browser_action" : {
+        "default_title": "default_title",
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/shprIcon.png",
+            "32": "icons/shprIcon.png",
+            "48": "icons/shprIcon.png",
+            "128": "icons/shprIcon.png"
+          }
+    },
+    "content_scripts":[
+        {
+            "js": ["content.js"],
+            "matches": [
+                "https://shop.mango.com/us/*/*/*",
+                "https://shop.lululemon.com/p/*",
+                "https://www.everlane.com/products/*"
+            ],
+
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "16": "icons/shprIcon.png",
+        "48": "icons/shprIcon.png",
+        "128": "icons/shprIcon.png" },
+    "manifest_version": 2
+}
