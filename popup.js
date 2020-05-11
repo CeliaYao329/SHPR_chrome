@@ -38,7 +38,7 @@ window.onload = function () {
     var curUrl;
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { type: 'popupInit' }, (response) => {
-            if (response.product) {
+            if (response && response.product) {
                 setProductContents(response.product)
             }
         });
