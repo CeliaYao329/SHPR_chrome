@@ -17,10 +17,10 @@
         "default_title": "default_title",
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "icons/shprIcon.png",
-            "32": "icons/shprIcon.png",
-            "48": "icons/shprIcon.png",
-            "128": "icons/shprIcon.png"
+            "16": "icons/shpr_icon/SHPR-favicon_edited.png",
+            "32": "icons/shpr_icon/SHPR-favicon_edited.png",
+            "48": "icons/shpr_icon/SHPR-favicon_edited.png",
+            "128": "icons/shpr_icon/SHPR-favicon_edited.png"
           }
     },
     "content_scripts":[
@@ -36,8 +36,8 @@
         }
     ],
     "icons": {
-        "16": "icons/shprIcon.png",
-        "48": "icons/shprIcon.png",
-        "128": "icons/shprIcon.png" },
+        "16": "icons/shpr_icon/SHPR-favicon_edited.png",
+        "48": "icons/shpr_icon/SHPR-favicon_edited.png",
+        "128": "icons/shpr_icon/SHPR-favicon_edited.png" },
     "manifest_version": 2
 }
