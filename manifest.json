@@ -25,7 +25,10 @@
     },
     "content_scripts":[
         {
-            "js": ["content.js"],
+            "js": [
+                "content.js",
+                "brand_scrapers/mango.js"
+            ],
             "matches": [
                 "https://shop.mango.com/us/*/*/*",
                 "https://shop.lululemon.com/p/*",

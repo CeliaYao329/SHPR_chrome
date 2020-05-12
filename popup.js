@@ -18,7 +18,7 @@ function setProductContents(productInfo) {
         document.getElementById('colorSelectReminder').classList.remove("text-secondary");
         document.getElementById('colorSelectReminder').classList.add("text-danger");
     }
-    if (productInfo.selected_size_idx != -1){
+    if (productInfo.selected_size_idx != -1) {
         for (index = 0; index < productInfo.size_names.length; index++) {
             if (index == productInfo.selected_size_idx) {
                 sizeSelect.textContent = productInfo.size_names[index];
@@ -34,6 +34,26 @@ function setProductContents(productInfo) {
     }
 }
 
+function fetchCollection() {
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", "https://www.shpr.store/account/new-page-2");
+    oReq.onreadystatechange = function () {
+        if (oReq.readyState == 4) {
+            var html = oReq.responseText;
+            var parser = new DOMParser();
+            var dom = parser.parseFromString(html, 'text/html');
+            var scripts = dom.querySelectorAll('script');
+            // Hard coded with the script that contains collection data in the html file
+            let pageDataTxt = scripts[14].innerText; 
+            pageDataTxt = pageDataTxt.slice(pageDataTxt.indexOf('{'), pageDataTxt.lastIndexOf(';'));
+            var obj = JSON.parse(pageDataTxt);
+            console.log(obj.userWarmup['dataItem-k9j0ah2a'].store['support01'].records);
+        }
+    }
+
+    oReq.send();
+}
+
 window.onload = function () {
     var curUrl;
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -46,17 +66,11 @@ window.onload = function () {
         console.log(curUrl);
     });
 
+    fetchCollection();
 
     var addButton = document.getElementById('addButton');
     if (addButton) {
         addButton.addEventListener('click', function () {
-            console.log("added button clicked");
-            console.log($("#brandName").text());
-            console.log($("#productNmae").text());
-            console.log($("#colorSelect").text());
-            console.log($("#sizeSelect").text());
-            console.log(curUrl);
-            console.log($('#productImg').attr('src'));
 
             var data = JSON.stringify({
                 "formProperties": {
@@ -133,13 +147,9 @@ window.onload = function () {
 
             xhr.open("POST", "https://www.shpr.store/_api/wix-forms/v1/submit-form");
             xhr.setRequestHeader("Authorization", "39YSckpgGJdQowb2qC5QLwtWC3Qs-b5sZbrMru1sKF0.eyJpbnN0YW5jZUlkIjoiMTRiMjIxZWItY2JmNS00NDI2LWIxNWEtZGFiNjE0MjI4MjdiIiwiYXBwRGVmSWQiOiIxNGNlMTIxNC1iMjc4LWE3ZTQtMTM3My0wMGNlYmQxYmVmN2MiLCJtZXRhU2l0ZUlkIjoiOWNiMmExYWEtZTk4MC00ZjEzLWE2YzUtOTRhZTE0NDNhMzg2Iiwic2lnbkRhdGUiOiIyMDIwLTA0LTE4VDAyOjAzOjI4LjU4NloiLCJ1aWQiOiI1MTRiMzZkMS0xYjhkLTRmODAtOTdiNC00N2I3MDI3YWJjZGYiLCJkZW1vTW9kZSI6ZmFsc2UsIm9yaWdpbkluc3RhbmNlSWQiOiIyNTA0OGYxNy0zZGFmLTQ5YzYtYjBmYy03ZTcxZjVhMzE4YmEiLCJhaWQiOiI0ZWY4ZDJlNS0zNjA0LTQwYWItOGY4Mi1kN2VkMmI2NjUxNWEiLCJiaVRva2VuIjoiODgwMDgwNDEtMjI3NS0wYjM1LTE3OWYtNGUxODAwNjEyMWZkIiwic2l0ZU93bmVySWQiOiI4MWFmYTZlMS04NmY2LTRjM2MtYTZlMC05Y2E5OTgyMmI4MzQiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDQtMThUMDY6MDM6MjguNTg2WiJ9");
-            // xhr.setRequestHeader("Sec-Fetch-Dest", "empty");
-            // xhr.setRequestHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36");
             xhr.setRequestHeader("X-Wix-Client-Artifact-Id", "wix-form-builder");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Accept", "*/*");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            // xhr.setRequestHeader("Cookie", "svSession=4d00ff11bc6321fdbc15ebdd8f56cfd217c64d5032c5817301bf73ec61ca5002e92c339ba4c84b1e0bd5c48fe38ba60b1e60994d53964e647acf431e4f798bcdd328fa2913c492183cc961f4f82499332da5529eda1bce9cc1016f1cda314a77; XSRF-TOKEN=1587699364|KFtIesV0HGR8; hs=-1006498251; smSession=JWS.eyJraWQiOiJQSXpvZGJiQiIsImFsZyI6IkhTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcIjUxNGIzNmQxLTFiOGQtNGY4MC05N2I0LTQ3YjcwMjdhYmNkZlwiLFwiY29sbGVjdGlvbklkXCI6XCIyNzc2NjhmYi1lNWRkLTQ4ODQtYTkxOC00OTc5YTlhNjBkNjBcIixcIm93bmVyXCI6ZmFsc2UsXCJjcmVhdGlvblRpbWVcIjoxNTg3NzAwMjUxNjc2LFwiZXhwaXJlc0luXCI6MTIwOTYwMDAwMCxcImV4cGlyYXRpb25UaW1lXCI6MTU4ODkwOTg1Mjk5NixcImxhc3RSZWZyZXNoZWRcIjoxNTg3NzUzMzcxMDgyLFwiYWRtaW5cIjpmYWxzZX0iLCJpYXQiOjE1ODc3NTMzNzF9.IeMgyBaHXHauJVwPiAwZL3fd8mLxcxk5DUtQrC77Wgo; TS01b37cb1=01f0e93131097645b094cde2da02ddaffaf109c2ec3edd8b4ec7537e4b13581226ee9865904569d86411f759682c84fb7fe49e9232; TS01a1afb9=01f0e93131097645b094cde2da02ddaffaf109c2ec3edd8b4ec7537e4b13581226ee9865904569d86411f759682c84fb7fe49e9232; TS01e85bed=01f0e931314286060b8557b1713136c542c51d1a04fea2087d5135ca3034ce2d358f195214a130206bb7b2e20369e393bf441fd830");
 
             xhr.send(data);
 
@@ -162,8 +172,8 @@ $(document).ready(function () {
     $('.goToCollection').on("click", function () {
         console.log("go to collection");
         // $('a[href="#pills-collection"]').tab('show');
-        window.open( 
-            "https://www.shpr.store/account/new-page-2", "_blank"); 
+        window.open(
+            "https://www.shpr.store/account/new-page-2", "_blank");
     })
 });
 
