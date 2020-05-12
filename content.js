@@ -10,6 +10,7 @@ function getBrand() {
 
 async function getProductInfo() {
     var [cap_brand_name, scraper] = getBrand();
+    console.log("brand", cap_brand_name);
     product = scraper();
     product.brand_name = cap_brand_name;
     console.log(product);
