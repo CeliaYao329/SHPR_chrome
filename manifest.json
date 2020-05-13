@@ -29,12 +29,16 @@
                 "content.js",
                 "brand_scrapers/mango.js",
                 "brand_scrapers/urbanoutfitters.js",
-                "brand_scrapers/asos.js"
+                "brand_scrapers/asos.js",
+                "brand_scrapers/reformation.js",
+                "brand_scrapers/everlane.js"
             ],
             "matches": [
                 "https://shop.mango.com/us/*/*/*",
                 "https://www.urbanoutfitters.com/shop/*",
                 "https://www.asos.com/us/*",
+                "https://www.everlane.com/products/*",
+                "https://www.thereformation.com/products/*",
                 "https://www.everlane.com/products/*"
             ],
 

@@ -1,7 +1,7 @@
 function asos_scraper() {
     var selected_color;
     var color_doms = document.querySelectorAll("#aside-content .product-colour:not(.disabled)");
-    
+    console.assert(color_doms.length == 1, "ASOS: unexpected color dom found");
     if (color_doms.length == 1) {
         selected_color = {
             name: color_doms[0].innerText,
