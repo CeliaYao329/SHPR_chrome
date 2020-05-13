@@ -1,8 +1,9 @@
 function everlane_scraper() {
+    var selected_color;
     var color_doms = document.querySelectorAll(".product-page__color-name.product-page__color-name--selected.product-page__color-name--hovered");
     console.assert(color_doms.length == 1, "Everlane: unexpected color dom found");
     if (color_doms.length == 1) {
-        selected_colr = {
+        selected_color = {
             name: color_doms[0].innerText,
             code: color_doms[0].innerText
         }
