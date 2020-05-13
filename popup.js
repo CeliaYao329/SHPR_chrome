@@ -7,30 +7,22 @@ function setProductContents(productInfo) {
     document.getElementById('productNmae').textContent = productInfo.product_name;
     document.getElementById('brandName').textContent = productInfo.brand_name;
     document.getElementById('productImg').src = productInfo.img_src;
-    if (productInfo.selected_color_idx != -1) {
-        for (index = 0; index < productInfo.colors.length; index++) {
-            if (index == productInfo.selected_color_idx) {
-                colorSelect.textContent = productInfo.colors[index].name;
-                break;
-            }
-        }
+    if (productInfo.selected_color) {
+        colorSelect.textContent = productInfo.selected_color.name;
     } else {
         document.getElementById('colorSelectReminder').classList.remove("text-secondary");
         document.getElementById('colorSelectReminder').classList.add("text-danger");
     }
-    if (productInfo.selected_size_idx != -1) {
-        for (index = 0; index < productInfo.size_names.length; index++) {
-            if (index == productInfo.selected_size_idx) {
-                sizeSelect.textContent = productInfo.size_names[index];
-                break;
-            }
-        }
+    if (productInfo.selected_size) {
+        sizeSelect.textContent = productInfo.selected_size;
     } else {
         document.getElementById('sizeSelectReminder').classList.remove("text-secondary");
         document.getElementById('sizeSelectReminder').classList.add("text-danger");
     }
-    if (productInfo.selected_color_idx != -1 && productInfo.selected_size_idx != -1) {
+
+    if (productInfo.selected_color && productInfo.selected_size) {
         document.getElementById('addButton').disabled = false;
+
     }
 }
 

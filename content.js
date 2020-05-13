@@ -23,6 +23,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     switch (msg.type) {
         case 'popupInit':
             getProductInfo();
+            console.log(product);
             response({ product: product });
             break;
         default:

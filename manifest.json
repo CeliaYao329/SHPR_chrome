@@ -28,12 +28,13 @@
             "js": [
                 "content.js",
                 "brand_scrapers/mango.js",
-                "brand_scrapers/urbanoutfitters.js"
+                "brand_scrapers/urbanoutfitters.js",
+                "brand_scrapers/asos.js"
             ],
             "matches": [
                 "https://shop.mango.com/us/*/*/*",
                 "https://www.urbanoutfitters.com/shop/*",
-                "https://shop.lululemon.com/p/*",
+                "https://www.asos.com/us/*",
                 "https://www.everlane.com/products/*"
             ],
 
