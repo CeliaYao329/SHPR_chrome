@@ -33,7 +33,8 @@
                 "brand_scrapers/reformation.js",
                 "brand_scrapers/everlane.js",
                 "brand_scrapers/zara.js",
-                "brand_scrapers/hm.js"
+                "brand_scrapers/hm.js",
+                "brand_scrapers/madewell.js"
             ],
             "matches": [
                 "https://shop.mango.com/us/*/*/*",
@@ -43,7 +44,8 @@
                 "https://www.thereformation.com/products/*",
                 "https://www.everlane.com/products/*",
                 "https://www.zara.com/us/en/*",
-                "https://www2.hm.com/*/productpage*"
+                "https://www2.hm.com/*/productpage*",
+                "https://www.madewell.com/*"
             ],
 
             "run_at": "document_end"
