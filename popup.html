@@ -15,8 +15,53 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-product" style="height:400px">
-            <div id="notFound" style="height: 400px">
-                <h1>brand not!</h1>
+            <div id="card notFound" style="height: 400px">
+                <div class="card-body">
+                    <h4>Sorry, we don't see a product in this page.</h4>
+                    <p> You could try refreshing the page or submitting your item directly:</p>
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <input type="text" class="form-control form-control-sm" id="brandManualSubmit"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="produceNameManualSubmit"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Size</label>
+                                    <input type="text" class="form-control form-control-sm" id="sizeManualSubmit"
+                                        placeholder="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Color</label>
+                                    <input type="text" class="form-control form-control-sm" id="colorManualSubmit"
+                                        placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-info btn-sm">Submit</button>
+                    </form>
+                </div>
+
             </div>
             <div class="card flex-md-row shadow-sm h-md-250" id="productCard" style="display: none;">
                 <div class="card-body d-flex flex-column align-items-start">
@@ -34,19 +79,22 @@
                             <form>
                                 <div>
                                     <label>Size</label>
-                                    <p class="selectReminder text-secondary" id="sizeSelectReminder">Please select a size in the page</p>
+                                    <p class="selectReminder text-secondary" id="sizeSelectReminder">Please select a
+                                        size in the page</p>
                                     <p class="selectedInfo" id="sizeSelect"> </p>
                                     <!-- <datalist class="form-control col-12" id="sizeSelect" required>
                                     </datalist> -->
                                 </div>
                                 <div>
                                     <label>Color</label>
-                                    <p class="selectReminder text-secondary" id="colorSelectReminder">Please select a color in the page</p>
+                                    <p class="selectReminder text-secondary" id="colorSelectReminder">Please select a
+                                        color in the page</p>
                                     <p class="selectedInfo" id="colorSelect"> </p>
                                     <!-- <select class="form-control col-12" id="colorSelect" required>
                                     </select> -->
                                 </div>
-                                <button href="https://www.shpr.store/account/new-page-2" type="button" id="addButton" class="btn btn-primary btn-sm" disabled>Add to
+                                <button href="https://www.shpr.store/account/new-page-2" type="button" id="addButton"
+                                    class="btn btn-primary btn-sm" disabled>Add to
                                     collection</button>
                             </form>
                         </div>
@@ -60,103 +108,103 @@
             </div>
         </div>
         <div class="tab-pane fade" id="pills-collection" style="height:400px">
-                <div class="card-body">
-                    <div class="table-responsive shadow-sm">
-                        <table class="table table-responsive table-hover" style="height:360px">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="p-2">
-                                            <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/S20/67094760_15.jpg?ts=1579684016771&imwidth=854&imdensity=2"
-                                                alt="" width="90" class="img-fluid shadow-sm">
-                                        </div>
-                                    </th>
-                                    <td class="align-middle">
-                                        <div class="d-inline-block align-middle">
-                                            <p class="d-inline-block mb-2 text-muted">Mango</p>
-                                            <p> <a href="#" class="text-dark d-inline-block align-middle">Openwork knit
-                                                    cardigan
-                                                </a></p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-    
-                                <tr>
-                                    <th scope="row">
-                                        <!-- <div class="p-2"> -->
-                                        <img src="https://images.lululemon.com/is/image/lululemon/LW5BPDS_028603_1?$pdp_image_carousel$&wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
-                                            alt="" width="70" class="img-fluid shadow-sm">
-                                        <!-- </div> -->
-                                    </th>
-                                    <td class="align-middle">
-                                        <div class="align-middle">
-                                            <p class="d-inline-block mb-2 text-muted">Lululemon</p>
-                                            <p><a href="#" class="text-dark d-inline-block align-middle">Align Pant II
-                                                    25"
-                                                </a></p>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-    
-                                <tr>
-                                    <th scope="row">
-                                        <!-- <div class="p-2"> -->
-                                        <img src="https://res.cloudinary.com/everlane/image/upload/c_scale/c_fill,dpr_2.0,f_auto,q_auto,w_auto:100:1200/v1/i/ac9eeb96_e610.jpg"
-                                            alt="" width="70" class="img-fluid shadow-sm">
-                                        <!-- </div> -->
-                                    </th>
-                                    <td class="align-middle">
-                                        <div class="align-middle">
-                                            <p class="d-inline-block mb-2 text-muted">Everlane</p>
-                                            <p><a href="#" class="text-dark d-inline-block align-middle">The Day Glove
-                                                </a></p>
-    
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-    
-                                <tr>
-                                    <th scope="row">
-                                        <!-- <div class="p-2"> -->
-                                        <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/outfit/S20/67064411_99-99999999_01.jpg?ts=1577086446286&imwidth=854&imdensity=2"
-                                            alt="" width="70" class="img-fluid shadow-sm">
-                                        <!-- </div> -->
-                                    </th>
-                                    <td class="align-middle">
-                                        <div class="align-middle">
-                                            <p class="d-inline-block mb-2 text-muted">Mango</p>
-                                            <p><a href="#" class="text-dark d-inline-block align-middle">Bicolour long
-                                                    jumpsuit
-                                                </a></p>
-    
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-    
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card-body">
+                <div class="table-responsive shadow-sm">
+                    <table class="table table-responsive table-hover" style="height:360px">
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/S20/67094760_15.jpg?ts=1579684016771&imwidth=854&imdensity=2"
+                                            alt="" width="90" class="img-fluid shadow-sm">
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <div class="d-inline-block align-middle">
+                                        <p class="d-inline-block mb-2 text-muted">Mango</p>
+                                        <p> <a href="#" class="text-dark d-inline-block align-middle">Openwork knit
+                                                cardigan
+                                            </a></p>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">
+                                    <!-- <div class="p-2"> -->
+                                    <img src="https://images.lululemon.com/is/image/lululemon/LW5BPDS_028603_1?$pdp_image_carousel$&wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
+                                        alt="" width="70" class="img-fluid shadow-sm">
+                                    <!-- </div> -->
+                                </th>
+                                <td class="align-middle">
+                                    <div class="align-middle">
+                                        <p class="d-inline-block mb-2 text-muted">Lululemon</p>
+                                        <p><a href="#" class="text-dark d-inline-block align-middle">Align Pant II
+                                                25"
+                                            </a></p>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">
+                                    <!-- <div class="p-2"> -->
+                                    <img src="https://res.cloudinary.com/everlane/image/upload/c_scale/c_fill,dpr_2.0,f_auto,q_auto,w_auto:100:1200/v1/i/ac9eeb96_e610.jpg"
+                                        alt="" width="70" class="img-fluid shadow-sm">
+                                    <!-- </div> -->
+                                </th>
+                                <td class="align-middle">
+                                    <div class="align-middle">
+                                        <p class="d-inline-block mb-2 text-muted">Everlane</p>
+                                        <p><a href="#" class="text-dark d-inline-block align-middle">The Day Glove
+                                            </a></p>
+
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">
+                                    <!-- <div class="p-2"> -->
+                                    <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/outfit/S20/67064411_99-99999999_01.jpg?ts=1577086446286&imwidth=854&imdensity=2"
+                                        alt="" width="70" class="img-fluid shadow-sm">
+                                    <!-- </div> -->
+                                </th>
+                                <td class="align-middle">
+                                    <div class="align-middle">
+                                        <p class="d-inline-block mb-2 text-muted">Mango</p>
+                                        <p><a href="#" class="text-dark d-inline-block align-middle">Bicolour long
+                                                jumpsuit
+                                            </a></p>
+
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
-            
+            </div>
+
         </div>
     </div>
 
