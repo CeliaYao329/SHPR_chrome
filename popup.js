@@ -26,25 +26,25 @@ function setProductContents(productInfo) {
     }
 }
 
-function fetchCollection() {
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", "https://www.shpr.store/account/new-page-2");
-    oReq.onreadystatechange = function () {
-        if (oReq.readyState == 4) {
-            var html = oReq.responseText;
-            var parser = new DOMParser();
-            var dom = parser.parseFromString(html, 'text/html');
-            var scripts = dom.querySelectorAll('script');
-            // Hard coded with the script that contains collection data in the html file
-            let pageDataTxt = scripts[14].innerText; 
-            pageDataTxt = pageDataTxt.slice(pageDataTxt.indexOf('{'), pageDataTxt.lastIndexOf(';'));
-            var obj = JSON.parse(pageDataTxt);
-            console.log(obj.userWarmup['dataItem-k9j0ah2a'].store['support01'].records);
-        }
-    }
+// function fetchCollection() {
+//     var oReq = new XMLHttpRequest();
+//     oReq.open("GET", "https://www.shpr.store/account/new-page-2");
+//     oReq.onreadystatechange = function () {
+//         if (oReq.readyState == 4) {
+//             var html = oReq.responseText;
+//             var parser = new DOMParser();
+//             var dom = parser.parseFromString(html, 'text/html');
+//             var scripts = dom.querySelectorAll('script');
+//             // Hard coded with the script that contains collection data in the html file
+//             let pageDataTxt = scripts[14].innerText; 
+//             pageDataTxt = pageDataTxt.slice(pageDataTxt.indexOf('{'), pageDataTxt.lastIndexOf(';'));
+//             var obj = JSON.parse(pageDataTxt);
+//             console.log(obj.userWarmup['dataItem-k9j0ah2a'].store['support01'].records);
+//         }
+//     }
 
-    oReq.send();
-}
+//     oReq.send();
+// }
 
 window.onload = function () {
     var curUrl;
@@ -58,7 +58,7 @@ window.onload = function () {
         console.log(curUrl);
     });
 
-    fetchCollection();
+    // fetchCollection();
 
     var addButton = document.getElementById('addButton');
     if (addButton) {
