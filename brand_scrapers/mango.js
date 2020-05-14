@@ -13,7 +13,10 @@ function mango_scraper() {
     var selected_size;
     var size_dom = document.querySelector(".selector-trigger");
     if(size_dom) {
-        selected_size = size_dom.innerText;
+        if(size_dom.innerText != "Choose your size") {
+            selected_size = size_dom.innerText;
+        }
+        
     }
     // if (size_spans.length == 0) {
     //     size_spans = document.querySelectorAll('single-size');
