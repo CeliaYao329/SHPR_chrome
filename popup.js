@@ -3,7 +3,7 @@ var email;
 var sessionToken;
 
 function updateCollection(collectionItems) {
-    const Item = ({ image, link, brand, title }) => `
+    const Item = ({ image, link, brand, title, size, color}) => `
     <tr>
         <th scope="row">
             <div class="p-2">
@@ -16,6 +16,7 @@ function updateCollection(collectionItems) {
                 <p class="d-inline-block mb-2 text-muted">${brand}</p>
                 <p> <a href="${link}" target="_blank" class="text-dark d-inline-block align-middle">${title}</a>
                 </p>
+                <p><small class="text-muted"> Size: ${size} Color: ${color} </small></p>
         </td>
     </tr>
     `;
@@ -176,7 +177,7 @@ window.onload = function () {
     if(refreshBtn) {
         refreshBtn.addEventListener('click', function() {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                
+                chrome.tabs.reload(tabs[0].id);
             });
         })
     }
@@ -189,6 +190,11 @@ $(document).ready(function () {
     $('.goToCollection').on("click", function () {
         window.open(
             "https://www.shpr.store/account/collection", "_blank");
+    })
+
+    $('#gotoSHPR').on("click", function () {
+        window.open(
+            "https://www.shpr.store/account/homepage", "_blank");
     })
 });
 
