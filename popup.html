@@ -13,51 +13,59 @@
         <a class="navbar-brand" href="https://www.shpr.store/">SHPR</a>
     </nav>
 
-    <div class="tab-content" id="pills-tabContent">
+    <!-- shown when user is not signed in yet in the chrome extension -->
+    <div class="card" id="logIn" style="height:400px; display: none;">
+        <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="container">
+                <form>
+                    <h4>Log in to your SHPR account</h4>
+
+                    <p>New to SHPR? <a href="https://www.shpr.store">Sign Up</a></p>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Enter email"
+                                    required>
+                                <small id="emailHelp" class="form-text text-muted">The same email you used to sign up on
+                                    SHPR</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Password"
+                                    required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="button" id="loginBtn" class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm" role="status" style="display:none"
+                            id="loginLoading"></span>
+                        <span id="loginTxt">Log In</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent" style="display: none;">
         <div class="tab-pane fade show active" id="pills-product" style="height:400px">
             <div class="card" id="notFound" style="height: 400px">
-                <div class="card-body">
-                    <h4>Sorry, we don't see a product in this page.</h4>
-                    <p> You could try refreshing the page or submitting your item directly:</p>
-                    <form id="manualSubmissionForm">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Brand</label>
-                                    <input type="text" class="form-control form-control-sm" id="brandManualSubmit"
-                                        placeholder="" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Product Name</label>
-                                    <input type="text" class="form-control form-control-sm" id="produceNameManualSubmit"
-                                        placeholder="" required>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-body d-flex align-items-center">
+                    <div>
+                        <h4>Sorry, we don't see a product in this page.</h4>
+                        <p> Please try <a id="refreshingPage">refreshing the page.</a> </p>
+                        <p>If you still see this, please click the button below to report the issue to SHPR!</p>
+                        <button type="submit" class="btn btn-primary">Report to SHPR</button>
+                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Size</label>
-                                    <input type="text" class="form-control form-control-sm" id="sizeManualSubmit"
-                                        placeholder="" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Color</label>
-                                    <input type="text" class="form-control form-control-sm" id="colorManualSubmit"
-                                        placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-info btn-sm" id="manualSubmit">Submit</button>
-                    </form>
                 </div>
 
             </div>
@@ -91,7 +99,7 @@
                                     <!-- <select class="form-control col-12" id="colorSelect" required>
                                     </select> -->
                                 </div>
-                                <button href="https://www.shpr.store/account/new-page-2" type="button" id="addButton"
+                                <button href="https://www.shpr.store/account/collection" type="button" id="addButton"
                                     class="btn btn-primary btn-sm" disabled>Add to
                                     collection</button>
                             </form>
@@ -106,15 +114,16 @@
             </div>
         </div>
         <div class="tab-pane fade" id="pills-collection" style="height:400px">
-            <div class="card-body">
+
+            <div class="card-body" id="collectionTable">
                 <div class="table-responsive shadow-sm">
-                    <table class="table table-responsive table-hover" style="height:360px">
-                        <tbody>
-                            <tr>
+                    <table id="collectionTable" class="table table-responsive table-hover" style="height:360px">
+                        <tbody id="collectionTableBody">
+                            <!-- <tr>
                                 <th scope="row">
                                     <div class="p-2">
                                         <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/S20/67094760_15.jpg?ts=1579684016771&imwidth=854&imdensity=2"
-                                            alt="" width="90" class="img-fluid shadow-sm">
+                                            alt="" width="70" class="img-fluid shadow-sm">
                                     </div>
                                 </th>
                                 <td class="align-middle">
@@ -122,21 +131,16 @@
                                         <p class="d-inline-block mb-2 text-muted">Mango</p>
                                         <p> <a href="#" class="text-dark d-inline-block align-middle">Openwork knit
                                                 cardigan
-                                            </a></p>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                            </a>
+                                        </p>
                                 </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">
-                                    <!-- <div class="p-2"> -->
                                     <img src="https://images.lululemon.com/is/image/lululemon/LW5BPDS_028603_1?$pdp_image_carousel$&wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
                                         alt="" width="70" class="img-fluid shadow-sm">
-                                    <!-- </div> -->
+
                                 </th>
                                 <td class="align-middle">
                                     <div class="align-middle">
@@ -146,19 +150,12 @@
                                             </a></p>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">
-                                    <!-- <div class="p-2"> -->
                                     <img src="https://res.cloudinary.com/everlane/image/upload/c_scale/c_fill,dpr_2.0,f_auto,q_auto,w_auto:100:1200/v1/i/ac9eeb96_e610.jpg"
                                         alt="" width="70" class="img-fluid shadow-sm">
-                                    <!-- </div> -->
                                 </th>
                                 <td class="align-middle">
                                     <div class="align-middle">
@@ -177,10 +174,8 @@
 
                             <tr>
                                 <th scope="row">
-                                    <!-- <div class="p-2"> -->
                                     <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/outfit/S20/67064411_99-99999999_01.jpg?ts=1577086446286&imwidth=854&imdensity=2"
                                         alt="" width="70" class="img-fluid shadow-sm">
-                                    <!-- </div> -->
                                 </th>
                                 <td class="align-middle">
                                     <div class="align-middle">
@@ -191,12 +186,7 @@
 
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
@@ -206,7 +196,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-sm bottom border-top nav-fill">
+    <nav class="navbar navbar-expand-sm bottom border-top nav-fill" id="pills-navbar" style="display: none;">
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="pill" href="#pills-product">Product</a>

@@ -18,16 +18,6 @@ function mango_scraper() {
         }
         
     }
-    // if (size_spans.length == 0) {
-    //     size_spans = document.querySelectorAll('single-size');
-    // }
-   
-    // for (let idx = 0; idx < size_spans.length; idx++) {
-    //     size_names.push(size_spans[idx].innerText);
-    //     if (size_spans[idx].getAttribute("aria-selected") == "true") {
-    //         selected_size = size_spans[idx].innerText;
-    //     }
-    // }
 
     var product_name = document.querySelector(".product-name").textContent;
     var img_src = document.querySelector(".image-1").src;

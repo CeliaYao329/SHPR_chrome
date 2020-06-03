@@ -1,5 +1,71 @@
+var curUrl;
+var email;
+var sessionToken;
+
+function updateCollection(collectionItems) {
+    const Item = ({ image, link, brand, title }) => `
+    <tr>
+        <th scope="row">
+            <div class="p-2">
+                <img src="${image}"
+                    alt="" width="90" class="img-fluid shadow-sm">
+            </div>
+        </th>
+        <td class="align-middle">
+            <div class="d-inline-block align-middle">
+                <p class="d-inline-block mb-2 text-muted">${brand}</p>
+                <p> <a href="${link}" target="_blank" class="text-dark d-inline-block align-middle">${title}</a>
+                </p>
+        </td>
+    </tr>
+    `;
+    $('#collectionTableBody').html(collectionItems.map(Item).join(''));
+}
+
+function navigatePage() {
+    chrome.storage.sync.get(['email', 'token', "collectionItems"], function (result) {
+        sessionToken = result.token;
+        email = result.email;
+        collectionItems = result.collectionItems;
+        if (!email) {
+            $('#logIn').css({ 'display': "block" });
+        } else {
+            $('#logIn').css({ 'display': "none" });
+            $('#pills-tabContent').css({ 'display': "block" });
+            $('#pills-navbar').css({ 'display': "block" });
+            updateCollection(collectionItems);
+        }
+    })
+}
+navigatePage();
+
+
+function isAlreadyInCollection(newItem) {
+    console.log(" in is alreadyinCollection");
+    return new Promise(function (resolve, reject) {
+        chrome.storage.sync.get(['collectionItems'], function (result) {
+
+            for (let id = 0; id < result.collectionItems.length; id++) {
+                if (result.collectionItems[id].title != newItem.product_name ||
+                    result.collectionItems[id].color != newItem.selected_color.name ||
+                    result.collectionItems[id].size != newItem.selected_size ||
+                    result.collectionItems[id].brand != newItem.brand_name) {
+                    continue;
+                } else {
+                    console.log("is Alredy in");
+                    resolve(true);
+                }
+            }
+            console.log("really new item");
+            resolve(false);
+        });
+
+    });
+}
+
+
 function setProductContents(productInfo) {
-    console.log("in setDomContents, ", productInfo);
+    console.log("set Product:", productInfo);
     $('#notFound').css({ 'display': "none" });
     $('#productCard').css({ 'display': "block" });
     var sizeSelect = document.getElementById("sizeSelect");
@@ -20,203 +86,119 @@ function setProductContents(productInfo) {
         document.getElementById('sizeSelectReminder').classList.add("text-danger");
     }
 
-    if (productInfo.selected_color && productInfo.selected_size) {
-        document.getElementById('addButton').disabled = false;
-    }
-}
-
-// function fetchCollection() {
-//     var oReq = new XMLHttpRequest();
-//     oReq.open("GET", "https://www.shpr.store/account/new-page-2");
-//     oReq.onreadystatechange = function () {
-//         if (oReq.readyState == 4) {
-//             var html = oReq.responseText;
-//             var parser = new DOMParser();
-//             var dom = parser.parseFromString(html, 'text/html');
-//             var scripts = dom.querySelectorAll('script');
-//             // Hard coded with the script that contains collection data in the html file
-//             let pageDataTxt = scripts[14].innerText; 
-//             pageDataTxt = pageDataTxt.slice(pageDataTxt.indexOf('{'), pageDataTxt.lastIndexOf(';'));
-//             var obj = JSON.parse(pageDataTxt);
-//             console.log(obj.userWarmup['dataItem-k9j0ah2a'].store['support01'].records);
-//         }
-//     }
-
-//     oReq.send();
-// }
-
-function newItemBuilder(newItem) {
-    var data = JSON.stringify({
-        "formProperties": {
-            "formName": "AddNewItem",
-            "formId": "comp-k9dn2y6i"
-        },
-        "emailConfig": {
-            "sendToOwnerAndEmails": {
-                "emailIds": []
+    isAlreadyInCollection(productInfo)
+        .then((isInCollection) => {
+            console.log(isInCollection);
+            if (productInfo.selected_color && productInfo.selected_size && isInCollection===false) {
+                document.getElementById('addButton').disabled = false;
             }
-        },
-        "viewMode": "Site",
-        "fields": [
-            {
-                "fieldId": "comp-k9dn2y6y",
-                "label": "Brand",
-                "additional":
-                {
-                    "value":
-                        { "string": newItem.brand }
-                }
-            },
-            {
-                "fieldId": "comp-k9dn2y721",
-                "label": "Title",
-                "additional":
-                {
-                    "value":
-                        { "string": newItem.productName }
-                }
-            },
-            {
-                "fieldId": "comp-k9dn2y742",
-                "label": "Color",
-                "additional":
-                    { "value": { "string": newItem.color } }
-            },
-            {
-                "fieldId": "comp-k9dn2y762",
-                "label": "Size",
-                "additional":
-                    { "value": { "string": newItem.size } }
-            },
-            {
-                "fieldId": "comp-k9dn2y782",
-                "label": "Link",
-                "additional":
-                {
-                    "value":
-                        { "string": newItem.url }
-                }
-            },
-            {
-                "fieldId": "comp-k9dn2y7a2",
-                "label": "Image",
-                "additional":
-                {
-                    "value":
-                        { "string": newItem.img_src }
-                }
-            }],
-        "labelIds": ["contacts-contacted_me", "a0913a8b-3fa6-4ed1-afe3-5f570e6c7036"]
-    });
-    return data;
+            if (isInCollection) {
+                console.log("already In");
+                document.getElementById('addButton').textContent = "Already in collection";
+            }
+        });
 }
+
+
 
 window.onload = function () {
-    var curUrl;
+
+    // get the collction of current user
+    chrome.runtime.sendMessage({ action: "updateCollection" });
+
+    // get the product on current page
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { type: 'popupInit' }, (response) => {
+            console.log("send message for product");
             if (response && response.product) {
                 setProductContents(response.product)
             }
         });
         curUrl = tabs[0].url;
-        console.log(curUrl);
     });
 
-    // fetchCollection();
+    var loginButton = document.getElementById('loginBtn');
 
-    var addButton = document.getElementById('addButton');
-    if (addButton) {
-        addButton.addEventListener('click', function () {
-            let newItem = {
-                brand: $("#brandName").text(),
-                productName: $("#productNmae").text(),
-                color: $("#colorSelect").text(),
-                size: $("#sizeSelect").text(),
-                url: curUrl,
-                img_src: $('#productImg').attr('src')
-            }
-            let data = newItemBuilder(newItem)
+    if (loginButton) {
+        loginButton.addEventListener('click', function () {
+            let email = document.getElementById("loginEmail").value;
+            let pwd = document.getElementById("loginPassword").value;
+            console.log("click login:", email, pwd);
+
+            var data = JSON.stringify({ "email": email, "password": pwd });
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    console.log(this.responseText);
+                    let response = JSON.parse(this.response);
+                    let loginApproved = response.approved;
+                    let loginSessionToken = response.sessionToken;
+                    if (loginApproved) {
+                        chrome.storage.sync.set({
+                            email: email,
+                            token: loginSessionToken,
+                        }, navigatePage);
+                    }
                 }
             });
 
-            xhr.open("POST", "https://www.shpr.store/_api/wix-forms/v1/submit-form");
-            xhr.setRequestHeader("Authorization", "39YSckpgGJdQowb2qC5QLwtWC3Qs-b5sZbrMru1sKF0.eyJpbnN0YW5jZUlkIjoiMTRiMjIxZWItY2JmNS00NDI2LWIxNWEtZGFiNjE0MjI4MjdiIiwiYXBwRGVmSWQiOiIxNGNlMTIxNC1iMjc4LWE3ZTQtMTM3My0wMGNlYmQxYmVmN2MiLCJtZXRhU2l0ZUlkIjoiOWNiMmExYWEtZTk4MC00ZjEzLWE2YzUtOTRhZTE0NDNhMzg2Iiwic2lnbkRhdGUiOiIyMDIwLTA0LTE4VDAyOjAzOjI4LjU4NloiLCJ1aWQiOiI1MTRiMzZkMS0xYjhkLTRmODAtOTdiNC00N2I3MDI3YWJjZGYiLCJkZW1vTW9kZSI6ZmFsc2UsIm9yaWdpbkluc3RhbmNlSWQiOiIyNTA0OGYxNy0zZGFmLTQ5YzYtYjBmYy03ZTcxZjVhMzE4YmEiLCJhaWQiOiI0ZWY4ZDJlNS0zNjA0LTQwYWItOGY4Mi1kN2VkMmI2NjUxNWEiLCJiaVRva2VuIjoiODgwMDgwNDEtMjI3NS0wYjM1LTE3OWYtNGUxODAwNjEyMWZkIiwic2l0ZU93bmVySWQiOiI4MWFmYTZlMS04NmY2LTRjM2MtYTZlMC05Y2E5OTgyMmI4MzQiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDQtMThUMDY6MDM6MjguNTg2WiJ9");
-            xhr.setRequestHeader("X-Wix-Client-Artifact-Id", "wix-form-builder");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Accept", "*/*");
-
+            xhr.open("POST", "https://www.shpr.store/_functions/login");
+            xhr.setRequestHeader("content-type", "application/json");
             xhr.send(data);
+            $("#loginBtn").disabled = true;
+            $("#loginLoading").css({ 'display': "block" });
+            $("#loginTxt").css({ 'display': "none" });
+        })
+    }
 
+    var addButton = document.getElementById('addButton');
+    if (addButton) {
+        addButton.addEventListener('click', function () {
+            let newItem = {
+                "brand": $("#brandName").text(),
+                "title": $("#productNmae").text(),
+                "color": $("#colorSelect").text(),
+                "size": $("#sizeSelect").text(),
+                "link": curUrl,
+                "image": $('#productImg').attr('src'),
+                "status": "Collected",
+                "sellingPrice": 0 // TODO
+            }
+            chrome.runtime.sendMessage({ action: "addItem", newItem: newItem });
             document.getElementById("addButton").textContent = "Added";
             document.getElementById("addedSuccess").style.visibility = "visible";
         }, false);
     }
 
-    var reserveButton = document.getElementById('reserveButton');
-    if (reserveButton) {
-        reserveButton.addEventListener('click', function () {
-            console.log("reserveButton clicked");
-            // $('#reserveSuccess').css({ 'display': "block" });
-            document.getElementById("reserveSuccess").style.visibility = "visible";
-        }, false);
-    }
-
-    const manualSubmissionForm = document.querySelector("#manualSubmissionForm");
-    if(manualSubmissionForm)
-        manualSubmissionForm.addEventListener('submit', handleManualSubmit);
-
-    function handleManualSubmit() {
-        let newItem = {
-            brand: $("brandManualSubmit".value),
-            productName: $("produceNameManualSubmit".value),
-            color: $("colorManualSubmit".value),
-            size: $("sizeManualSubmit".value),
-            url: curUrl,
-            img_src: "https://placeimg.com/640/480/people?t=1589484976838"
-        }
-        let data = newItemBuilder(newItem)
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        xhr.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                console.log(this.responseText);
-            }
-        });
-
-        xhr.open("POST", "https://www.shpr.store/_api/wix-forms/v1/submit-form");
-        xhr.setRequestHeader("Authorization", "39YSckpgGJdQowb2qC5QLwtWC3Qs-b5sZbrMru1sKF0.eyJpbnN0YW5jZUlkIjoiMTRiMjIxZWItY2JmNS00NDI2LWIxNWEtZGFiNjE0MjI4MjdiIiwiYXBwRGVmSWQiOiIxNGNlMTIxNC1iMjc4LWE3ZTQtMTM3My0wMGNlYmQxYmVmN2MiLCJtZXRhU2l0ZUlkIjoiOWNiMmExYWEtZTk4MC00ZjEzLWE2YzUtOTRhZTE0NDNhMzg2Iiwic2lnbkRhdGUiOiIyMDIwLTA0LTE4VDAyOjAzOjI4LjU4NloiLCJ1aWQiOiI1MTRiMzZkMS0xYjhkLTRmODAtOTdiNC00N2I3MDI3YWJjZGYiLCJkZW1vTW9kZSI6ZmFsc2UsIm9yaWdpbkluc3RhbmNlSWQiOiIyNTA0OGYxNy0zZGFmLTQ5YzYtYjBmYy03ZTcxZjVhMzE4YmEiLCJhaWQiOiI0ZWY4ZDJlNS0zNjA0LTQwYWItOGY4Mi1kN2VkMmI2NjUxNWEiLCJiaVRva2VuIjoiODgwMDgwNDEtMjI3NS0wYjM1LTE3OWYtNGUxODAwNjEyMWZkIiwic2l0ZU93bmVySWQiOiI4MWFmYTZlMS04NmY2LTRjM2MtYTZlMC05Y2E5OTgyMmI4MzQiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDQtMThUMDY6MDM6MjguNTg2WiJ9");
-        xhr.setRequestHeader("X-Wix-Client-Artifact-Id", "wix-form-builder");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Accept", "*/*");
-
-        xhr.send(data);
-
-        document.getElementById("addButton").textContent = "Added";
-        document.getElementById("addedSuccess").style.visibility = "visible";
-
+    var refreshBtn = document.getElementById('refreshPage');
+    if(refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                
+            });
+        })
     }
 }
 
+
+
+
 $(document).ready(function () {
     $('.goToCollection').on("click", function () {
-        console.log("go to collection");
-        // $('a[href="#pills-collection"]').tab('show');
         window.open(
-            "https://www.shpr.store/account/new-page-2", "_blank");
+            "https://www.shpr.store/account/collection", "_blank");
     })
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
-    console.log("getting msg");
-    console.log(msg);
-
-});
-
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+    for (key in changes) {
+        if (key === 'collectionItems') {
+            console.log("collectionChanged");
+            chrome.storage.sync.get(['collectionItems'], function (result) {
+                updateCollection(result.collectionItems);
+            })
+        }
+    }
+})

@@ -20,6 +20,7 @@ window.onload = function () {
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
+    console.log("pop up ask me for product info");
     switch (msg.type) {
         case 'popupInit':
             getProductInfo();
