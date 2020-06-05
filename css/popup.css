@@ -40,7 +40,7 @@ label {
 
 .selectedInfo {
     min-height: 1.75rem;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
