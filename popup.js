@@ -1,9 +1,10 @@
 var curUrl;
 var email;
 var sessionToken;
+var currentProduct;
 
 function updateCollection(collectionItems) {
-    const Item = ({ image, link, brand, title, size, color}) => `
+    const Item = ({ image, link, brand, title, size, color }) => `
     <tr>
         <th scope="row">
             <div class="p-2">
@@ -90,7 +91,7 @@ function setProductContents(productInfo) {
     isAlreadyInCollection(productInfo)
         .then((isInCollection) => {
             console.log(isInCollection);
-            if (productInfo.selected_color && productInfo.selected_size && isInCollection===false) {
+            if (productInfo.selected_color && productInfo.selected_size && isInCollection === false) {
                 document.getElementById('addButton').disabled = false;
             }
             if (isInCollection) {
@@ -112,6 +113,7 @@ window.onload = function () {
         chrome.tabs.sendMessage(tabs[0].id, { type: 'popupInit' }, (response) => {
             console.log("send message for product");
             if (response && response.product) {
+                currentProduct = response.product;
                 setProductContents(response.product)
             }
         });
@@ -157,15 +159,16 @@ window.onload = function () {
     var addButton = document.getElementById('addButton');
     if (addButton) {
         addButton.addEventListener('click', function () {
+            console.log("added product", currentProduct);
             let newItem = {
                 "brand": $("#brandName").text(),
                 "title": $("#productNmae").text(),
                 "color": $("#colorSelect").text(),
                 "size": $("#sizeSelect").text(),
                 "link": curUrl,
+                "sellingPrice": currentProduct.selling_price,
                 "image": $('#productImg').attr('src'),
-                "status": "Collected",
-                "sellingPrice": 0 // TODO
+                "status": "Collected"
             }
             chrome.runtime.sendMessage({ action: "addItem", newItem: newItem });
             document.getElementById("addButton").textContent = "Added";
@@ -174,8 +177,8 @@ window.onload = function () {
     }
 
     var refreshBtn = document.getElementById('refreshPage');
-    if(refreshBtn) {
-        refreshBtn.addEventListener('click', function() {
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.reload(tabs[0].id);
             });

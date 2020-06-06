@@ -18,12 +18,14 @@ function thereformation_scraper() {
 
     var product_name = document.querySelector(".pdp__name").innerText;
     var img_src = document.querySelector(".pdp-thumbs__primary-image.lazyloaded").src;
-
+    var regex = /[+-]?\d+(\.\d+)?/g;
+    var selling_price = parseFloat(document.querySelector(".product-prices__price").innerText.match(regex)[0]);
     var product = {
         selected_color: selected_color,
         selected_size: selected_size,
         product_name: product_name,
-        img_src: img_src
+        img_src: img_src,
+        selling_price: selling_price
     }
     return (product);
 }

@@ -16,12 +16,18 @@ function zara_scraper() {
 
     var product_name = document.querySelector(".product-name").firstChild.wholeText;
     var img_src = document.querySelector(".image-big").src;
-
+    var regex = /[+-]?\d+(\.\d+)?/g;
+    var price_dom = document.querySelector(".main-price");
+    if (!price_dom) {
+        price_dom = document.querySelector(".sale");
+    }
+    var selling_price = parseFloat(price_dom.innerText.match(regex)[0]);
     var product = {
         selected_color: selected_color,
         selected_size: selected_size,
         product_name: product_name,
-        img_src: img_src
+        img_src: img_src,
+        selling_price: selling_price
     }
     return (product);
 }

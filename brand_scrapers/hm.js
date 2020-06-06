@@ -26,12 +26,14 @@ function hm_scraper() {
 
     var product_name = document.querySelector(".primary.product-item-headline").innerText;
     var img_src = document.querySelector(".product-detail-main-image-container").firstElementChild.src;
-
+    var regex = /[+-]?\d+(\.\d+)?/g;
+    var selling_price = parseFloat(document.querySelector(".price-value").innerText.match(regex)[0]);
     var product = {
         selected_color: selected_color,
         selected_size: selected_size,
         product_name: product_name,
-        img_src: img_src
+        img_src: img_src,
+        selling_price: selling_price
     }
     return (product);
 }

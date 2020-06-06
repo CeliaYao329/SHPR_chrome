@@ -16,12 +16,15 @@ function everlane_scraper() {
 
     var product_name = document.querySelector(".product-heading__name").innerText
     var img_src = document.querySelectorAll(".zoomImg")[0].src;
-
+    var regex = /[+-]?\d+(\.\d+)?/g;
+    var selling_price = document.querySelector(".product-heading__price-value").innerText.match(regex);
+    
     var product = {
         selected_color: selected_color,
         selected_size: selected_size,
         product_name: product_name,
-        img_src: img_src
+        img_src: img_src,
+        selling_price: selling_price
     }
     return (product);
 }
