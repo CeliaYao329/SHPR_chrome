@@ -35,7 +35,8 @@
                 "brand_scrapers/zara.js",
                 "brand_scrapers/hm.js",
                 "brand_scrapers/madewell.js",
-                "brand_scrapers/uniqlo.js"
+                "brand_scrapers/uniqlo.js",
+                "brand_scrapers/puma.js"
             ],
             "matches": [
                 "https://shop.mango.com/us/*/*/*",
@@ -47,7 +48,8 @@
                 "https://www.zara.com/us/en/*",
                 "https://www2.hm.com/*/productpage*",
                 "https://www.madewell.com/*",
-                "https://www.uniqlo.com/us/en/*"
+                "https://www.uniqlo.com/us/en/*",
+                "https://us.puma.com/en/us/pd/*"
             ],
 
             "run_at": "document_end"
