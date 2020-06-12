@@ -11,6 +11,7 @@
 <body>
     <nav class="navbar">
         <a class="navbar-brand" id="gotoSHPR" href="https://www.shpr.store/">SHPR</a>
+        <a class="btn btn-small btn-outline-info my-2 my-sm-0" id="gotoDashboard" href="https://www.shpr.store/account/dashboard" target="_blank" style="display: none;">My Dashboard</a>
     </nav>
 
     <!-- shown when user is not signed in yet in the chrome extension -->
@@ -56,7 +57,7 @@
     </div>
 
     <div class="tab-content" id="pills-tabContent" style="display: none;">
-        <div class="tab-pane fade show active" id="pills-product" style="height:400px">
+        <div class="tab-pane fade" id="pills-product" style="height:445px">
             <div class="card" id="notFound" style="height: 400px">
                 <div class="card-body d-flex align-items-center">
                     <div>
@@ -113,81 +114,29 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-collection" style="height:400px">
+        <div class="tab-pane fade show active" id="pills-collection">
+            <div class="container">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg" alt=""
+                                        class="mx-auto rounded-circle img-fluid">
+                                </div>
+                                <div class="col-8 d-flex align-items-center">
+                                    <h5 class="mb-0 text-truncated">TODO: User Name here</h5>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card-body" id="collectionTable">
                 <div class="table-responsive shadow-sm">
-                    <table id="collectionTable" class="table table-responsive table-hover" style="height:360px">
+                    <table id="collectionTable" class="table table-responsive table-hover" style="height:320px">
                         <tbody id="collectionTableBody">
-                            <!-- <tr>
-                                <th scope="row">
-                                    <div class="p-2">
-                                        <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/S20/67094760_15.jpg?ts=1579684016771&imwidth=854&imdensity=2"
-                                            alt="" width="70" class="img-fluid shadow-sm">
-                                    </div>
-                                </th>
-                                <td class="align-middle">
-                                    <div class="d-inline-block align-middle">
-                                        <p class="d-inline-block mb-2 text-muted">Mango</p>
-                                        <p> <a href="#" class="text-dark d-inline-block align-middle">Openwork knit
-                                                cardigan
-                                            </a>
-                                        </p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">
-                                    <img src="https://images.lululemon.com/is/image/lululemon/LW5BPDS_028603_1?$pdp_image_carousel$&wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
-                                        alt="" width="70" class="img-fluid shadow-sm">
-
-                                </th>
-                                <td class="align-middle">
-                                    <div class="align-middle">
-                                        <p class="d-inline-block mb-2 text-muted">Lululemon</p>
-                                        <p><a href="#" class="text-dark d-inline-block align-middle">Align Pant II
-                                                25"
-                                            </a></p>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">
-                                    <img src="https://res.cloudinary.com/everlane/image/upload/c_scale/c_fill,dpr_2.0,f_auto,q_auto,w_auto:100:1200/v1/i/ac9eeb96_e610.jpg"
-                                        alt="" width="70" class="img-fluid shadow-sm">
-                                </th>
-                                <td class="align-middle">
-                                    <div class="align-middle">
-                                        <p class="d-inline-block mb-2 text-muted">Everlane</p>
-                                        <p><a href="#" class="text-dark d-inline-block align-middle">The Day Glove
-                                            </a></p>
-
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">
-                                    <img src="https://st.mngbcn.com/rcs/pics/static/T6/fotos/outfit/S20/67064411_99-99999999_01.jpg?ts=1577086446286&imwidth=854&imdensity=2"
-                                        alt="" width="70" class="img-fluid shadow-sm">
-                                </th>
-                                <td class="align-middle">
-                                    <div class="align-middle">
-                                        <p class="d-inline-block mb-2 text-muted">Mango</p>
-                                        <p><a href="#" class="text-dark d-inline-block align-middle">Bicolour long
-                                                jumpsuit
-                                            </a></p>
-
-                                    </div>
-                                </td>
-                            </tr> -->
-
                         </tbody>
                     </table>
                 </div>
@@ -199,10 +148,10 @@
     <nav class="navbar navbar-expand-sm bottom border-top nav-fill" id="pills-navbar" style="display: none;">
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#pills-product">Product</a>
+                <a class="nav-link" data-toggle="pill" href="#pills-product" id="tab-product">Add a product</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#pills-collection">Collection</a>
+                <a class="nav-link active" data-toggle="pill" href="#pills-collection" id="tab-collection">My account</a>
             </li>
         </ul>
     </nav>

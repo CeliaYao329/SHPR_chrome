@@ -33,6 +33,7 @@ function navigatePage() {
             $('#logIn').css({ 'display': "block" });
         } else {
             $('#logIn').css({ 'display': "none" });
+            $('#gotoDashboard').css({ 'display': "block" });
             $('#pills-tabContent').css({ 'display': "block" });
             $('#pills-navbar').css({ 'display': "block" });
             updateCollection(collectionItems);
@@ -99,6 +100,7 @@ function setProductContents(productInfo) {
                 document.getElementById('addButton').textContent = "Already in collection";
             }
         });
+        $('#tab-product').tab('show');
 }
 
 
@@ -197,7 +199,7 @@ $(document).ready(function () {
 
     $('#gotoSHPR').on("click", function () {
         window.open(
-            "https://www.shpr.store/account/homepage", "_blank");
+            "https://www.shpr.store/account/dashboard", "_blank");
     })
 });
 
