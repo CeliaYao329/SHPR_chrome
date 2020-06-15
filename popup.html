@@ -11,7 +11,8 @@
 <body>
     <nav class="navbar">
         <a class="navbar-brand" id="gotoSHPR" href="https://www.shpr.store/">SHPR</a>
-        <a class="btn btn-small btn-outline-info my-2 my-sm-0" id="gotoDashboard" href="https://www.shpr.store/account/dashboard" target="_blank" style="display: none;">My Dashboard</a>
+        <a class="btn btn-sm btn-outline-info my-2 my-sm-0" id="gotoDashboard"
+            href="https://www.shpr.store/account/dashboard" target="_blank" style="display: none;">My Dashboard</a>
     </nav>
 
     <!-- shown when user is not signed in yet in the chrome extension -->
@@ -57,7 +58,8 @@
     </div>
 
     <div class="tab-content" id="pills-tabContent" style="display: none;">
-        <div class="tab-pane fade" id="pills-product" style="height:445px">
+        <div class="tab-pane fade" id="pills-product" style="height:447px">
+            <!-- Not related wbsite. -->
             <div class="card" id="notFound" style="height: 400px">
                 <div class="card-body d-flex align-items-center">
                     <div>
@@ -66,10 +68,10 @@
                         <p>If you still see this, please click the button below to report the issue to SHPR!</p>
                         <button type="submit" class="btn btn-sm btn-secondary">Report to SHPR</button>
                     </div>
-
                 </div>
-
             </div>
+
+            <!-- Product page -->
             <div class="card flex-md-row shadow-sm h-md-250" id="productCard" style="display: none;height: 400px;">
                 <div class="card-body d-flex flex-column align-items-start">
                     <div class="row">
@@ -116,31 +118,27 @@
         </div>
         <div class="tab-pane fade show active" id="pills-collection">
             <div class="container">
-                <div class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <img src="https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg" alt=""
-                                        class="mx-auto rounded-circle img-fluid">
-                                </div>
-                                <div class="col-8 d-flex align-items-center">
-                                    <h5 class="mb-0 text-truncated">TODO: User Name here</h5>
-                                </div>
-
-                            </div>
+                <div class="row-fluid" style="height:100px">
+                    <h6>Trending brands</h6>
+                    <div class="col-12">
+                        <div class="cover-container" id="TrendyBrands">
+                            <div class="cover-item"><img
+                                    src="https://s3-eu-central-1.amazonaws.com/centaur-wp/designweek/prod/content/uploads/2019/06/27172619/3_adidas_originals.jpg"
+                                    style="width:50px; height:50px" class="img-fluid"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body" id="collectionTable">
-                <div class="table-responsive shadow-sm">
-                    <table id="collectionTable" class="table table-responsive table-hover" style="height:320px">
-                        <tbody id="collectionTableBody">
-                        </tbody>
-                    </table>
+                <h6>Your collection</h6>
+                <div class="card-body" id="collectionTable">
+                    <div class="table-responsive shadow-sm">
+                        <table id="collectionTable" class="table table-responsive table-hover" style="height:300px">
+                            <tbody id="collectionTableBody">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -151,7 +149,8 @@
                 <a class="nav-link" data-toggle="pill" href="#pills-product" id="tab-product">Add a product</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#pills-collection" id="tab-collection">My account</a>
+                <a class="nav-link active" data-toggle="pill" href="#pills-collection" id="tab-collection">My
+                    account</a>
             </li>
         </ul>
     </nav>

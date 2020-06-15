@@ -2,13 +2,6 @@ body {
     width: 400px;
     max-height: 400px;
 }
-/* .input-group>.input-group-prepend {
-    flex: 0 0 20%;
-}
-
-.input-group .input-group-text {
-    width: 100%;
-} */
 
 
         .navbar .bottom{
@@ -48,4 +41,26 @@ label {
 
 #pills-collection .card-body {
     padding-top: 0rem;
+}
+
+.cover-container {
+    height: 75px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.cover-item {
+    position: relative;
+    display: inline-block;
+    margin: 5px 5px;
+    box-shadow: 2px 2px 4px #bbb;
+    border-top-right-radius: 4px;
+    width: 50px;
+    height: 50px;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

@@ -7,9 +7,9 @@ function updateCollection(collectionItems) {
     const Item = ({ image, link, brand, title, size, color }) => `
     <tr>
         <th scope="row">
-            <div class="p-2">
+            <div class="p-1">
                 <img src="${image}"
-                    alt="" width="90" class="img-fluid shadow-sm">
+                    alt="" width="65" class="img-fluid shadow-sm">
             </div>
         </th>
         <td class="align-middle">
@@ -24,24 +24,34 @@ function updateCollection(collectionItems) {
     $('#collectionTableBody').html(collectionItems.map(Item).join(''));
 }
 
+function updateTrendyBrands(brandLogos) {
+    const Item = ( image ) => `
+    <div class="cover-item"><img src="${image}"
+    style="width:50px; height:50px" class="img-fluid"></div>`;
+    $("#TrendyBrands").html(brandLogos.map(Item).join(''));
+}
+
 function navigatePage() {
-    chrome.storage.sync.get(['email', 'token', "collectionItems"], function (result) {
+
+    chrome.storage.sync.get(['email', 'token', "collectionItems", "trendyBrands"], function (result) {
         sessionToken = result.token;
         email = result.email;
         collectionItems = result.collectionItems;
+        trendyBrands = result.trendyBrands;
         if (!email) {
             $('#logIn').css({ 'display': "block" });
         } else {
             $('#logIn').css({ 'display': "none" });
+            $('#gotoDashboard').innerHTML = "Siyu Yao";
             $('#gotoDashboard').css({ 'display': "block" });
             $('#pills-tabContent').css({ 'display': "block" });
             $('#pills-navbar').css({ 'display': "block" });
             updateCollection(collectionItems);
+            updateTrendyBrands(trendyBrands);
         }
     })
 }
 navigatePage();
-
 
 function isAlreadyInCollection(newItem) {
     console.log(" in is alreadyinCollection");
@@ -100,12 +110,14 @@ function setProductContents(productInfo) {
                 document.getElementById('addButton').textContent = "Already in collection";
             }
         });
-        $('#tab-product').tab('show');
+    $('#tab-product').tab('show');
 }
 
 
 
 window.onload = function () {
+    // get the popular brands
+    chrome.runtime.sendMessage({action: "updateTrendyBrands"});
 
     // get the collction of current user
     chrome.runtime.sendMessage({ action: "updateCollection" });
@@ -206,9 +218,13 @@ $(document).ready(function () {
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (key in changes) {
         if (key === 'collectionItems') {
-            console.log("collectionChanged");
             chrome.storage.sync.get(['collectionItems'], function (result) {
                 updateCollection(result.collectionItems);
+            })
+        }
+        if (key === 'trendyBrands') {
+            chrome.storage.sync.get(['trendyBrands'], function (result) {
+                updateTrendyBrands(result.trendyBrands);
             })
         }
     }
