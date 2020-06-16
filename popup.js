@@ -32,7 +32,6 @@ function updateTrendyBrands(brandLogos) {
 }
 
 function navigatePage() {
-
     chrome.storage.sync.get(['email', 'token', "collectionItems", "trendyBrands"], function (result) {
         sessionToken = result.token;
         email = result.email;
@@ -113,7 +112,54 @@ function setProductContents(productInfo) {
     $('#tab-product').tab('show');
 }
 
+function setBrandReminderMsg(brandName) {
+    $('#notFound').css({ 'display': "block" });
+    let brandMsgHtml = `
+    <div class="card-body d-flex align-items-center" style="height: 400px;">
+        <div>
+            <h4>${brandName} is on SHPR!</h4>
+            <p>Let us help you shop ${brandName}. Please go to a page of product detail to add the item into your SHPR collection.</p>
+        </div>
+    </div>
+    `;
+    $("#notFound").html(brandMsgHtml);
+    
+}
 
+function notSupportedReminderMsg() {
+    $('#notFound').css({ 'display': "block" });
+    let notFoundHtml = `
+    <div class ="card" style="height: 400px;">
+        <div class="card-body d-flex align-items-center">
+            <div>
+                <h4>Sorry, we don't see a product in this page.</h4>
+                <p> Please try <a id="refreshPage" href="#">refreshing the page.</a> </p>
+                <p>If you still see this, please click the button below to report the issue to SHPR!</p>
+                <button type="submit" class="btn btn-sm btn-secondary" id="report">Report to SHPR</button>
+            </div>
+        </div>
+    </div>`;
+    $("#notFound").html(notFoundHtml);
+
+    var reportBtn = document.getElementById('report');
+    if(reportBtn) {
+        reportBtn.addEventListener('click', function () {
+            console.log("report clicked");
+            chrome.runtime.sendMessage({ action: "report", link: curUrl });
+            document.getElementById("report").textContent = "Reported";
+            document.getElementById("report").disabled = true;
+        })
+    }
+
+    var refreshBtn = document.getElementById('refreshPage');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.reload(tabs[0].id);
+            });
+        })
+    }
+}
 
 window.onload = function () {
     // get the popular brands
@@ -123,16 +169,24 @@ window.onload = function () {
     chrome.runtime.sendMessage({ action: "updateCollection" });
 
     // get the product on current page
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { type: 'popupInit' }, (response) => {
-            console.log("send message for product");
-            if (response && response.product) {
-                currentProduct = response.product;
-                setProductContents(response.product)
-            }
+    try {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, { type: 'popupInit' }, (response) => {
+                if (response && response.product) {
+                    currentProduct = response.product;
+                    setProductContents(response.product)
+                } else if (response && response.brandName) {
+                    setBrandReminderMsg(response.brandName);
+                } else {
+                    notSupportedReminderMsg();
+                }
+            });
+            curUrl = tabs[0].url;
         });
-        curUrl = tabs[0].url;
-    });
+    } catch (error) {
+        notSupportedReminderMsg();
+    }
+    
 
     var loginButton = document.getElementById('loginBtn');
 
@@ -190,14 +244,6 @@ window.onload = function () {
         }, false);
     }
 
-    var refreshBtn = document.getElementById('refreshPage');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', function () {
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                chrome.tabs.reload(tabs[0].id);
-            });
-        })
-    }
 }
 
 

@@ -1,31 +1,50 @@
+// All the brand supported:
+const Brands = {
+    "asos": "ASOS",
+    "everlane": "Everlane",
+    "hm": "H&M",
+    "madewell": "Madewell",
+    "mango": "Mango",
+    "puma": "Puma",
+    "thereformation": "Reformation",
+    "uniqlo": "Uniqlo",
+    "urbanoutfitters": "Urban Outfitters",
+    "zara": "Zara" 
+}
+
+
 // Return the brand name, and its correspoinding scraper function name
-var product;
+var cap_brand_name = null;
+var product = null;
 
 function getBrand() {
     brand_name = window.location.hostname.split('.')[1];
-    cap_brand_name = brand_name[0].toUpperCase() + brand_name.slice(1);
-    return [cap_brand_name, window[brand_name + "_scraper"]];
-}
-
-
-async function getProductInfo() {
-    var [cap_brand_name, scraper] = getBrand();
-    console.log("brand", cap_brand_name);
-    product = scraper();
-    product.brand_name = cap_brand_name;
-    console.log(product);
+    if (brand_name in Brands) {
+        let realName = Brands[brand_name];
+        return [realName, window[brand_name + "_scraper"]]; 
+    } else {
+        return [null, null];
+    }
 }
 
 window.onload = function () {
+    console.log("content run");
 }
 
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
+chrome.runtime.onMessage.addListener(async (msg, sender, response) => {
     console.log("pop up ask me for product info");
     switch (msg.type) {
         case 'popupInit':
-            getProductInfo();
-            console.log(product);
-            response({ product: product });
+            var [cap_brand_name, scraper] = getBrand();
+            if(scraper !== null) {
+                try {
+                    product = scraper();
+                    product.brand_name = cap_brand_name;
+                } catch(err) {
+                    product = null;
+                }
+            }
+            response({ brandName: cap_brand_name, product: product });
             break;
         default:
             response('unknown request');

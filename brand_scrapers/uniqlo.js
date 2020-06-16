@@ -15,7 +15,7 @@ function uniqlo_scraper() {
         selected_size = selected_size_dom.innerText;
 
     var product_name = document.querySelector(".product-name").innerText;
-    var img_src = document.querySelectorAll(".primary-image").src;
+    var img_src = document.querySelector(".primary-image").src;
     var selling_price = parseFloat(document.querySelector(".price-sales.pdp-space-price").innerText.match(regex)[0]);
     var product = {
         selected_color: selected_color,

@@ -88,6 +88,23 @@ function fetchTrendyBrands() {
   xhr.send();
 }
 
+
+function reportBrand(link) {
+  var data = JSON.stringify({ "link": link });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  // xhr.addEventListener("readystatechange", function () {
+  //   if (this.readyState === 4) {
+  //   }
+  // });
+
+  xhr.open("POST", "https://www.shpr.store/_functions/reportBrands");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(data);
+}
+
 function addItemToCollection(userEmail, newItem) {
   let data = JSON.stringify({
     "email": userEmail,
@@ -137,6 +154,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.action === "updateTrendyBrands") {
     console.log("Popup asked me to update trendy brands");
     fetchTrendyBrands();
+  }
+
+  if (request.action === "report") {
+    console.log("report brand:" , request.link);
+    reportBrand(request.link);
   }
 });
 

@@ -39,19 +39,9 @@
                 "brand_scrapers/puma.js"
             ],
             "matches": [
-                "https://shop.mango.com/us/*/*/*",
-                "https://www.urbanoutfitters.com/shop/*",
-                "https://www.asos.com/us/*",
-                "https://www.everlane.com/products/*",
-                "https://www.thereformation.com/products/*",
-                "https://www.everlane.com/products/*",
-                "https://www.zara.com/us/en/*",
-                "https://www2.hm.com/*/productpage*",
-                "https://www.madewell.com/*",
-                "https://www.uniqlo.com/us/en/*",
-                "https://us.puma.com/en/us/pd/*"
+                "http://*/*",
+                "https://*/*"
             ],
-
             "run_at": "document_end"
         }
     ],
