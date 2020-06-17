@@ -1,12 +1,28 @@
 
 chrome.runtime.onInstalled.addListener(function () {
   console.log("onInstalled");
-  chrome.storage.sync.set({
-    email: null,
-    token: null
-  }, function () {
-    console.log("initializing user info");
-  });
+
+
+  chrome.cookies.get({ url: 'https://www.shpr.store', name: 'smSession' },
+    function (cookie) {
+      if (cookie) {
+        chrome.storage.sync.set({
+          email: null,
+          token: null
+        }, function () {
+          console.log(cookie.value);
+        });
+
+      }
+      else {
+        chrome.storage.sync.set({
+          email: null,
+          token: null
+        }, function () {
+          console.log("initializing user info");
+        });
+      }
+    });
 
   // chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
   //     console.log("removed");
@@ -157,7 +173,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 
   if (request.action === "report") {
-    console.log("report brand:" , request.link);
+    console.log("report brand:", request.link);
     reportBrand(request.link);
   }
 });

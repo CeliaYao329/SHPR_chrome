@@ -25,9 +25,9 @@ function updateCollection(collectionItems) {
 }
 
 function updateTrendyBrands(brandLogos) {
-    const Item = ( image ) => `
-    <div class="cover-item"><img src="${image}"
-    style="width:50px; height:50px" class="img-fluid"></div>`;
+    const Item = ( {link, imageUrl} ) => `
+    <div class="cover-item"><a href="${link}" target="_blank"><img src="${imageUrl}"
+    style="width:50px; height:50px" class="img-fluid"></a></div>`;
     $("#TrendyBrands").html(brandLogos.map(Item).join(''));
 }
 
@@ -162,6 +162,9 @@ function notSupportedReminderMsg() {
 }
 
 window.onload = function () {
+
+    
+
     // get the popular brands
     chrome.runtime.sendMessage({action: "updateTrendyBrands"});
 
