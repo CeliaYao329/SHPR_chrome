@@ -25,7 +25,7 @@ function updateCollection(collectionItems) {
 }
 
 function updateTrendyBrands(brandLogos) {
-    const Item = ( {link, imageUrl} ) => `
+    const Item = ({ link, imageUrl }) => `
     <div class="cover-item"><a href="${link}" target="_blank"><img src="${imageUrl}"
     style="width:50px; height:50px" class="img-fluid"></a></div>`;
     $("#TrendyBrands").html(brandLogos.map(Item).join(''));
@@ -123,7 +123,7 @@ function setBrandReminderMsg(brandName) {
     </div>
     `;
     $("#notFound").html(brandMsgHtml);
-    
+
 }
 
 function notSupportedReminderMsg() {
@@ -142,7 +142,7 @@ function notSupportedReminderMsg() {
     $("#notFound").html(notFoundHtml);
 
     var reportBtn = document.getElementById('report');
-    if(reportBtn) {
+    if (reportBtn) {
         reportBtn.addEventListener('click', function () {
             console.log("report clicked");
             chrome.runtime.sendMessage({ action: "report", link: curUrl });
@@ -163,10 +163,10 @@ function notSupportedReminderMsg() {
 
 window.onload = function () {
 
-    
+
 
     // get the popular brands
-    chrome.runtime.sendMessage({action: "updateTrendyBrands"});
+    chrome.runtime.sendMessage({ action: "updateTrendyBrands" });
 
     // get the collction of current user
     chrome.runtime.sendMessage({ action: "updateCollection" });
@@ -189,12 +189,13 @@ window.onload = function () {
     } catch (error) {
         notSupportedReminderMsg();
     }
-    
+
 
     var loginButton = document.getElementById('loginBtn');
 
     if (loginButton) {
         loginButton.addEventListener('click', function () {
+            $("#loginErrorMsg").text("");
             let email = document.getElementById("loginEmail").value;
             let pwd = document.getElementById("loginPassword").value;
             console.log("click login:", email, pwd);
@@ -214,6 +215,13 @@ window.onload = function () {
                             email: email,
                             token: loginSessionToken,
                         }, navigatePage);
+                    }
+                    else {
+                        console.log("wrong login");
+                        $("#loginErrorMsg").text("The email or password is not correct.");
+                        $("#loginBtn").disabled = false;
+                        $("#loginLoading").css({ 'display': "none" });
+                        $("#loginTxt").css({ 'display': "block" });
                     }
                 }
             });

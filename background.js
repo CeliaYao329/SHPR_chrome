@@ -83,25 +83,28 @@ function fetchTrendyBrands() {
 
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      if (this.status === 200) {
-        let response = JSON.parse(this.response);
-        chrome.storage.sync.set({
-          trendyBrands: response.items
-        }, function () {
-          console.log("Updated trendy brands");
-        });
-        resolve(response);
-      } else {
-        reject(this.status);
+
+  return new Promise((resolve, reject) => {
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let response = JSON.parse(this.response);
+          chrome.storage.sync.set({
+            trendyBrands: response.items
+          }, function () {
+            console.log("Updated trendy brands");
+          });
+          resolve(response);
+        } else {
+          reject(this.status);
+        }
       }
-    }
+    });
+
+    xhr.open("GET", "https://www.shpr.store/_functions/trendyBrands");
+
+    xhr.send();
   });
-
-  xhr.open("GET", "https://www.shpr.store/_functions/trendyBrands");
-
-  xhr.send();
 }
 
 

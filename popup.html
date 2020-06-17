@@ -30,8 +30,8 @@
                                 <label>Email address</label>
                                 <input type="email" class="form-control" id="loginEmail" placeholder="Enter email"
                                     required>
-                                <small id="emailHelp" class="form-text text-muted">The same email you used to sign up on
-                                    SHPR</small>
+                                <small id="emailHelp" class="form-text text-muted">The email you used to create your
+                                    SHPR profile</small>
                             </div>
                         </div>
 
@@ -47,11 +47,16 @@
                         </div>
 
                     </div>
+                    <a href="https://www.shpr.store/forget-password" target="_blank">
+                        <p><small>Forget password?</small></p>
+                    </a>
+
                     <button type="button" id="loginBtn" class="btn btn-primary">
                         <span class="spinner-border spinner-border-sm" role="status" style="display:none"
                             id="loginLoading"></span>
                         <span id="loginTxt">Log In</span>
                     </button>
+                    <p id="loginErrorMsg"><small></small></p>
                 </form>
             </div>
         </div>
@@ -82,16 +87,14 @@
                             <form>
                                 <div>
                                     <label>Size</label>
-                                    <p class="selectReminder text-secondary" id="sizeSelectReminder">Please select a
-                                        size in the page</p>
+                                    <p class="selectReminder text-secondary" id="sizeSelectReminder">Select a size on the page</p>
                                     <p class="selectedInfo" id="sizeSelect"> </p>
                                     <!-- <datalist class="form-control col-12" id="sizeSelect" required>
                                     </datalist> -->
                                 </div>
                                 <div>
                                     <label>Color</label>
-                                    <p class="selectReminder text-secondary" id="colorSelectReminder">Please select a
-                                        color in the page</p>
+                                    <p class="selectReminder text-secondary" id="colorSelectReminder">Select a color on the page</p>
                                     <p class="selectedInfo" id="colorSelect"> </p>
                                     <!-- <select class="form-control col-12" id="colorSelect" required>
                                     </select> -->

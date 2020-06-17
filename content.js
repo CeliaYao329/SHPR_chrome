@@ -28,7 +28,7 @@ function getBrand() {
 }
 
 window.onload = function () {
-    console.log("content run");
+    
 }
 
 chrome.runtime.onMessage.addListener(async (msg, sender, response) => {
