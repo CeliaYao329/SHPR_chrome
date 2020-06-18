@@ -12,11 +12,14 @@ function mango_scraper() {
 
     var selected_size;
     var size_dom = document.querySelector(".selector-trigger");
+    var one_size_dom = document.querySelector(".single-size");
     if(size_dom) {
         if(size_dom.innerText != "Choose your size") {
             selected_size = size_dom.innerText;
         }
-        
+    }
+    if(one_size_dom) {
+        selected_size = one_size_dom.innerText;
     }
 
     var product_name = document.querySelector(".product-name").textContent;

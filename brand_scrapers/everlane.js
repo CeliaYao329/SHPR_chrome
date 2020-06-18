@@ -10,15 +10,21 @@ function everlane_scraper() {
     }
 
     var selected_size;
-    let selected_size_dom = document.querySelector(".product-page__size-selection.product-page__size-selection--selected")
-    if(selected_size_dom)
-        selected_size = selected_size_dom.querySelector(".product-page__size-selection-name").innerText;
+    let select_size_label = document.querySelector(".product-page__size-selection-cta");
+    if (select_size_label === null) {
+        selected_size = "No Size";
+    } else {
+        let selected_size_dom = document.querySelector(".product-page__size-selection.product-page__size-selection--selected")
+        if (selected_size_dom)
+            selected_size = selected_size_dom.querySelector(".product-page__size-selection-name").innerText;
+    }
+
 
     var product_name = document.querySelector(".product-heading__name").innerText
     var img_src = document.querySelectorAll(".zoomImg")[0].src;
     var regex = /[+-]?\d+(\.\d+)?/g;
     var selling_price = document.querySelector(".product-heading__price-value").innerText.match(regex);
-    
+
     var product = {
         selected_color: selected_color,
         selected_size: selected_size,

@@ -17,7 +17,7 @@ function puma_scraper() {
     var img_src = document.querySelector("puma-images").shadowRoot.querySelector("img").src;
     
     var regex = /[+-]?\d+(\.\d+)?/g;
-    var selling_price = parseFloat(document.querySelector(".sales.is-sale-price").innerText.match(regex)[0]);
+    var selling_price = parseFloat(document.querySelector(".sales").innerText.match(regex)[0]);
    
     var product = {
         selected_color: selected_color,

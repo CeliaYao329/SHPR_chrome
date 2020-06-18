@@ -218,7 +218,7 @@ window.onload = function () {
                     }
                     else {
                         console.log("wrong login");
-                        $("#loginErrorMsg").text("The email or password is not correct.");
+                        $("#loginErrorMsg").text("Looks like an incorrect email or password.");
                         $("#loginBtn").disabled = false;
                         $("#loginLoading").css({ 'display': "none" });
                         $("#loginTxt").css({ 'display': "block" });
