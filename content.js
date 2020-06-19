@@ -14,7 +14,8 @@ const Brands = {
     "katespade": "Kate Spade",
     "bcbg": "BCBGMAXAZRIA",
     "freepeople": "Free People",
-    "loft": "LOFT"
+    "loft": "LOFT",
+    "anthropologie": "Anthropologie"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
