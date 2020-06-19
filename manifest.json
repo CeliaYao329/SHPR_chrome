@@ -43,7 +43,8 @@
                 "brand_scrapers/freepeople.js",
                 "brand_scrapers/loft.js",
                 "brand_scrapers/anthropologie.js",
-                "brand_scrapers/tommy.js"
+                "brand_scrapers/tommy.js",
+                "brand_scrapers/jcrew.js"
             ],
             "matches": [
                 "http://*/*",

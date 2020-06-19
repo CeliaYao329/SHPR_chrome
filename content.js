@@ -16,7 +16,8 @@ const Brands = {
     "freepeople": "Free People",
     "loft": "LOFT",
     "anthropologie": "Anthropologie",
-    "tommy": "Tommy Hilfiger"
+    "tommy": "Tommy Hilfiger",
+    "jcrew": "J.Crew"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
