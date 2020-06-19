@@ -15,7 +15,8 @@ const Brands = {
     "bcbg": "BCBGMAXAZRIA",
     "freepeople": "Free People",
     "loft": "LOFT",
-    "anthropologie": "Anthropologie"
+    "anthropologie": "Anthropologie",
+    "tommy": "Tommy Hilfiger"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
