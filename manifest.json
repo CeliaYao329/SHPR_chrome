@@ -38,8 +38,8 @@
                 "brand_scrapers/uniqlo.js",
                 "brand_scrapers/puma.js",
                 "brand_scrapers/ba-sh.js",
-                "brand_scrapers/katespade.js"
-                
+                "brand_scrapers/katespade.js",
+                "brand_scrapers/bcbg.js"
             ],
             "matches": [
                 "http://*/*",

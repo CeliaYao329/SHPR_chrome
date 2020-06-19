@@ -11,7 +11,8 @@ const Brands = {
     "urbanoutfitters": "Urban Outfitters",
     "zara": "Zara",
     "ba-sh":"ba&sh",
-    "katespade": "Kate Spade"
+    "katespade": "Kate Spade",
+    "bcbg": "BCBGMAXAZRIA"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
