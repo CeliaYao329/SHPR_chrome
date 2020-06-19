@@ -36,7 +36,10 @@
                 "brand_scrapers/hm.js",
                 "brand_scrapers/madewell.js",
                 "brand_scrapers/uniqlo.js",
-                "brand_scrapers/puma.js"
+                "brand_scrapers/puma.js",
+                "brand_scrapers/ba-sh.js",
+                "brand_scrapers/katespade.js"
+                
             ],
             "matches": [
                 "http://*/*",
