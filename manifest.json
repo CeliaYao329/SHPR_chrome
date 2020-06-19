@@ -40,7 +40,8 @@
                 "brand_scrapers/ba-sh.js",
                 "brand_scrapers/katespade.js",
                 "brand_scrapers/bcbg.js",
-                "brand_scrapers/freepeople.js"
+                "brand_scrapers/freepeople.js",
+                "brand_scrapers/loft.js"
             ],
             "matches": [
                 "http://*/*",
