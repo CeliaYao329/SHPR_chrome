@@ -12,7 +12,8 @@ const Brands = {
     "zara": "Zara",
     "ba-sh":"ba&sh",
     "katespade": "Kate Spade",
-    "bcbg": "BCBGMAXAZRIA"
+    "bcbg": "BCBGMAXAZRIA",
+    "freepeople": "Free People"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
