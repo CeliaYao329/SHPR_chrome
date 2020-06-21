@@ -17,7 +17,10 @@ const Brands = {
     "loft": "LOFT",
     "anthropologie": "Anthropologie",
     "tommy": "Tommy Hilfiger",
-    "jcrew": "J.Crew"
+    "jcrew": "J.Crew",
+    "cosstores": "COS",
+    "michaelkors": "Michael Kors",
+    "anntaylor": "Ann Taylor"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
