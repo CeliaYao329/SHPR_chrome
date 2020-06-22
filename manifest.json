@@ -47,7 +47,9 @@
                 "brand_scrapers/jcrew.js",
                 "brand_scrapers/cos.js",
                 "brand_scrapers/michaelkors.js",
-                "brand_scrapers/anntaylor.js"
+                "brand_scrapers/anntaylor.js",
+                "brand_scrapers/oakandfort.js",
+                "brand_scrapers/bananarepublic.js"
             ],
             "matches": [
                 "http://*/*",
