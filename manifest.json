@@ -50,7 +50,10 @@
                 "brand_scrapers/anntaylor.js",
                 "brand_scrapers/oakandfort.js",
                 "brand_scrapers/bananarepublic.js",
-                "brand_scrapers/rouje.js"
+                "brand_scrapers/rouje.js",
+                "brand_scrapers/sezane.js",
+                "brand_scrapers/staud.js"
+
             ],
             "matches": [
                 "http://*/*",

@@ -23,7 +23,9 @@ const Brands = {
     "anntaylor": "Ann Taylor",
     "oakandfort": "Oak + Fort",
     "bananarepublic": "Banana Republic",
-    "rouje": "Rouje"
+    "rouje": "Rouje",
+    "sezane": "Sezane",
+    "staud": "Staud"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page
