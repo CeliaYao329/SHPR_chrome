@@ -22,7 +22,8 @@ const Brands = {
     "michaelkors": "Michael Kors",
     "anntaylor": "Ann Taylor",
     "oakandfort": "Oak + Fort",
-    "bananarepublic": "Banana Republic"
+    "bananarepublic": "Banana Republic",
+    "rouje": "Rouje"
 }
 
 // Testing: random, sale, one-size, unavailable, non-product page

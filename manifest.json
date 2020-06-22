@@ -49,7 +49,8 @@
                 "brand_scrapers/michaelkors.js",
                 "brand_scrapers/anntaylor.js",
                 "brand_scrapers/oakandfort.js",
-                "brand_scrapers/bananarepublic.js"
+                "brand_scrapers/bananarepublic.js",
+                "brand_scrapers/rouje.js"
             ],
             "matches": [
                 "http://*/*",
